@@ -1,0 +1,66 @@
+# Папки сборки
+bin/
+obj/
+
+# Файлы Visual Studio
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+*.userprefs
+
+# Файлы ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Файлы Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Файлы сборки
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Файлы .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Файлы Visual Studio
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Локальные файлы истории Visual Studio
+.localhistory/
+
+# Файлы состояния Visual Studio
+*.vs/
+
+# Файлы NuGet
+*.nupkg
+*.snupkg
+**/packages/*
+*.nuget.props
+*.nuget.targets
+
+# Файлы JetBrains Rider
+.idea/
+*.sln.iml 
