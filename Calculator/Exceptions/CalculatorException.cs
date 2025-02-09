@@ -10,7 +10,7 @@ public class CalculatorException : Exception
 public class InsufficientArgumentsException : CalculatorException
 {
     public InsufficientArgumentsException(string operation) 
-        : base($"Недостаточно аргументов для операции '{operation}'")
+        : base($"Insufficient arguments for operation '{operation}'")
     {
     }
 }
@@ -18,7 +18,7 @@ public class InsufficientArgumentsException : CalculatorException
 public class FunctionNotFoundException : CalculatorException 
 {
     public FunctionNotFoundException(string function)
-        : base($"Функция '{function}' не найдена")
+        : base($"Function '{function}' not found")
     {
     }
 }

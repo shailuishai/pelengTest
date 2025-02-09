@@ -1,9 +1,38 @@
 # Папки сборки
-bin/
-obj/
+build/
+out/
+[Bb]uild/
+
+# Файлы CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+Testing/
+DartConfiguration.tcl
 
 # Файлы Visual Studio
 .vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# Скомпилированные файлы
+*.exe
+*.obj
+*.dll
+*.lib
+*.pdb
+*.ilk
+*.exp
+*.app
+*.so
+*.dylib
+
+# Файлы Visual Studio
 *.user
 *.userosscache
 *.sln.docstates
@@ -16,7 +45,11 @@ _ReSharper*/
 *.DotSettings.user
 
 # Файлы Visual Studio Code
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 *.code-workspace
 
 # Файлы сборки
@@ -63,4 +96,8 @@ artifacts/
 
 # Файлы JetBrains Rider
 .idea/
-*.sln.iml 
+*.sln.iml
+
+# Файлы операционной системы
+.DS_Store
+Thumbs.db 

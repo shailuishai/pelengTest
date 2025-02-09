@@ -9,7 +9,7 @@ public class Addition : IOperation
         _operation = (a, b) => a + b;
     }
     
-    public string Description => "Складывает два числа";
+    public string Description => "Adds two numbers";
     public string Usage => "add 2 3";
     public string Parameters => "(args: a double, b double)";
     public double Call(params double[] args)
@@ -29,7 +29,7 @@ public class Subtraction : IOperation
         _operation = (a, b) => a - b;
     }
     
-    public string Description => "Вычитает два числа";
+    public string Description => "Subtracts two numbers";
     public string Usage => "sub 5 3";
     public string Parameters => "(args: a double, b double)";
     public double Call(params double[] args)
@@ -49,7 +49,7 @@ public class Multiplication : IOperation
         _operation = (a, b) => a * b;
     }
     
-    public string Description => "Умножает два числа";
+    public string Description => "Multiplies two numbers";
     public string Usage => "mul 2 3";
     public string Parameters => "(args: a double, b double)";
     public double Call(params double[] args)
@@ -68,12 +68,12 @@ public class Division : IOperation
     {
         _operation = (a, b) => {
             if (b == 0)
-                throw new CalculatorException("Деление на ноль невозможно");
+                throw new CalculatorException("Division by zero is not possible");
             return a / b;
         };
     }
     
-    public string Description => "Делит два числа";
+    public string Description => "Divides two numbers";
     public string Usage => "div 6 3";
     public string Parameters => "(args: a double, b double)";
     public double Call(params double[] args)
@@ -92,12 +92,12 @@ public class Modulo : IOperation
     {
         _operation = (a, b) => {
             if (b == 0)
-                throw new CalculatorException("Деление на ноль невозможно");
+                throw new CalculatorException("Division by zero is not possible");
             return a % b;
         };
     }
     
-    public string Description => "Вычисляет остаток от деления двух чисел";
+    public string Description => "Calculates the remainder of division of two numbers";
     public string Usage => "mod 7 3";
     public string Parameters => "(args: a double, b double)";
     public double Call(params double[] args)
@@ -117,7 +117,7 @@ public class Power : IOperation
         _operation = Math.Pow;
     }
     
-    public string Description => "Возводит число в указанную степень";
+    public string Description => "Raises a number to the specified power";
     public string Usage => "pow 2 3";
     public string Parameters => "(args: base double, exponent double)";
     public double Call(params double[] args)
@@ -137,7 +137,7 @@ public class Square : IUnaryOperation
         _operation = x => Math.Pow(x, 2);
     }
     
-    public string Description => "Возводит число в квадрат";
+    public string Description => "Squares a number";
     public string Usage => "sqr 5";
     public string Parameters => "(args: number double)";
     public double Call(params double[] args)
@@ -156,11 +156,11 @@ public class Factorial : IUnaryOperation
     {
         _operation = x => {
             if (x < 0)
-                throw new CalculatorException("Факториал отрицательного числа не определен");
+                throw new CalculatorException("Factorial is not defined for negative numbers");
             if (x != Math.Floor(x))
-                throw new CalculatorException("Факториал может быть вычислен только для целых чисел");
+                throw new CalculatorException("Factorial can only be calculated for integers");
             if (x > 170)
-                throw new CalculatorException("Слишком большое число для вычисления факториала");
+                throw new CalculatorException("Number is too large to calculate factorial");
 
             double result = 1;
             for (int i = 2; i <= x; i++)
@@ -169,7 +169,7 @@ public class Factorial : IUnaryOperation
         };
     }
     
-    public string Description => "Вычисляет факториал числа";
+    public string Description => "Calculates the factorial of a number";
     public string Usage => "fact 5";
     public string Parameters => "(args: number double)";
     public double Call(params double[] args)

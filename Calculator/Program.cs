@@ -13,7 +13,7 @@ namespace MyProgram
             var helpCommand = new HelpCommand(operationProvider);
             var exitCommand = new ExitCommand();
             
-            Console.WriteLine("Калькулятор запущен. Введите 'help' для просмотра доступных команд.");
+            Console.WriteLine("Calculator started. Type 'help' to see available commands.");
             Console.WriteLine();
 
             while (true)
@@ -23,7 +23,7 @@ namespace MyProgram
 
                 if (string.IsNullOrEmpty(input))
                 {
-                    Console.WriteLine("Ошибка: Пустой ввод");
+                    Console.WriteLine("Error: Empty input");
                     continue;
                 }
 
@@ -41,26 +41,26 @@ namespace MyProgram
                     }
 
                     var operation = operationProvider.GetOperation(input);
-                    Console.WriteLine($"Параметры: {operation.Parameters}");
+                    Console.WriteLine($"Parameters: {operation.Parameters}");
                     Console.Write("args: ");
                     var arguments = Console.ReadLine();
 
                     if (string.IsNullOrEmpty(arguments))
                     {
-                        Console.WriteLine("Ошибка: Пустой ввод");
+                        Console.WriteLine("Error: Empty input");
                         continue;
                     }
 
                     var result = calculator.Calculate($"{input} {arguments}");
-                    Console.WriteLine($"Результат: {result}");
+                    Console.WriteLine($"Result: {result}");
                 }
                 catch (CalculatorException ex)
                 {
-                    Console.WriteLine($"Ошибка: {ex.Message}");
+                    Console.WriteLine($"Error: {ex.Message}");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Произошла непредвиденная ошибка: {ex.Message}");
+                    Console.WriteLine($"An unexpected error occurred: {ex.Message}");
                 }
             }
         }

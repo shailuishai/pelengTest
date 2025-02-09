@@ -9,7 +9,7 @@ public class Sin : IUnaryOperation
         _operation = Math.Sin;
     }
     
-    public string Description => "Вычисляет синус угла (в радианах)";
+    public string Description => "Calculates the sine of an angle (in radians)";
     public string Usage => "sin 1.57";
     public string Parameters => "(args: angle double)";
     public double Call(params double[] args)
@@ -29,7 +29,7 @@ public class Cos : IUnaryOperation
         _operation = Math.Cos;
     }
     
-    public string Description => "Вычисляет косинус угла (в радианах)";
+    public string Description => "Calculates the cosine of an angle (in radians)";
     public string Usage => "cos 3.14";
     public string Parameters => "(args: angle double)";
     public double Call(params double[] args)
@@ -49,7 +49,7 @@ public class Tan : IUnaryOperation
         _operation = Math.Tan;
     }
     
-    public string Description => "Вычисляет тангенс угла (в радианах)";
+    public string Description => "Calculates the tangent of an angle (in radians)";
     public string Usage => "tan 0.785";
     public string Parameters => "(args: angle double)";
     public double Call(params double[] args)
@@ -69,12 +69,12 @@ public class Cotangent : IUnaryOperation
         _operation = x => {
             double tanValue = Math.Tan(x);
             if (tanValue == 0)
-                throw new CalculatorException("Котангенс не определен для углов, кратных π/2");
+                throw new CalculatorException("Cotangent is not defined for angles that are multiples of π/2");
             return 1.0 / tanValue;
         };
     }
     
-    public string Description => "Вычисляет котангенс угла (в радианах)";
+    public string Description => "Calculates the cotangent of an angle (in radians)";
     public string Usage => "cot 0.785";
     public string Parameters => "(args: angle double)";
     public double Call(params double[] args)
@@ -93,12 +93,12 @@ public class SquareRoot : IUnaryOperation
     {
         _operation = x => {
             if (x < 0)
-                throw new CalculatorException("Квадратный корень отрицательного числа не определен в действительных числах");
+                throw new CalculatorException("Square root of a negative number is not defined in real numbers");
             return Math.Sqrt(x);
         };
     }
     
-    public string Description => "Вычисляет квадратный корень числа";
+    public string Description => "Calculates the square root of a number";
     public string Usage => "sqrt 16";
     public string Parameters => "(args: number double)";
     public double Call(params double[] args)
@@ -117,14 +117,14 @@ public class Logarithm : IOperation
     {
         _operation = (x, b) => {
             if (x <= 0)
-                throw new CalculatorException("Логарифм определен только для положительных чисел");
+                throw new CalculatorException("Logarithm is only defined for positive numbers");
             if (b <= 0 || b == 1)
-                throw new CalculatorException("Основание логарифма должно быть положительным числом, не равным 1");
+                throw new CalculatorException("Logarithm base must be a positive number not equal to 1");
             return Math.Log(x, b);
         };
     }
     
-    public string Description => "Вычисляет логарифм числа по указанному основанию";
+    public string Description => "Calculates the logarithm of a number with specified base";
     public string Usage => "log 8 2";
     public string Parameters => "(args: number double, base double)";
     public double Call(params double[] args)
@@ -143,12 +143,12 @@ public class NaturalLogarithm : IUnaryOperation
     {
         _operation = x => {
             if (x <= 0)
-                throw new CalculatorException("Натуральный логарифм определен только для положительных чисел");
+                throw new CalculatorException("Natural logarithm is only defined for positive numbers");
             return Math.Log(x);
         };
     }
     
-    public string Description => "Вычисляет натуральный логарифм числа";
+    public string Description => "Calculates the natural logarithm of a number";
     public string Usage => "ln 2.718";
     public string Parameters => "(args: number double)";
     public double Call(params double[] args)
@@ -168,7 +168,7 @@ public class Absolute : IUnaryOperation
         _operation = Math.Abs;
     }
     
-    public string Description => "Вычисляет модуль числа";
+    public string Description => "Calculates the absolute value of a number";
     public string Usage => "abs -5";
     public string Parameters => "(args: number double)";
     public double Call(params double[] args)

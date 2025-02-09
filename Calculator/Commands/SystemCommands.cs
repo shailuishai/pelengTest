@@ -10,14 +10,14 @@ public class HelpCommand : ISystemCommand
     }
 
     public string Name => "help";
-    public string Description => "Показывает список доступных команд и операций";
+    public string Description => "Shows list of available commands and operations";
 
     public void Execute()
     {
-        Console.WriteLine("Доступные команды: \n");
-        Console.WriteLine("  h, help    Показывает список доступных команд и операций");
-        Console.WriteLine("  e, exit    Выход из программы \n");
-        Console.WriteLine("Доступные операции: \n");
+        Console.WriteLine("Available commands: \n");
+        Console.WriteLine("  h, help    Shows list of available commands and operations");
+        Console.WriteLine("  e, exit    Exit program \n");
+        Console.WriteLine("Available operations: \n");
         _operationProvider.ShowHelp();
     }
 }
@@ -25,11 +25,11 @@ public class HelpCommand : ISystemCommand
 public class ExitCommand : ISystemCommand
 {
     public string Name => "exit";
-    public string Description => "Выход из программы";
+    public string Description => "Exit program";
 
     public void Execute()
     {
-        Console.WriteLine("Программа завершена.");
+        Console.WriteLine("Program terminated.");
         Environment.Exit(0);
     }
 } 

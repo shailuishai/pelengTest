@@ -63,24 +63,24 @@ public class InputParser
     public (string operation, decimal[] arguments) Parse(string input)
     {
         if (string.IsNullOrWhiteSpace(input))
-            throw new CalculatorException("Введите команду");
+            throw new CalculatorException("Enter a command");
 
         var parts = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         
         if (parts.Length == 0)
-            throw new CalculatorException("Неверный формат ввода");
+            throw new CalculatorException("Invalid input format");
 
         var operation = parts[0].ToLower().Replace("op:", "").Trim();
         
-        // Специальная обработка для команды помощи
+        // Special handling for help command
         if (operation == "h")
         {
             return (operation, Array.Empty<decimal>());
         }
 
-        // Обработка остальных команд
+        // Processing other commands
         if (parts.Length < 2)
-            throw new CalculatorException("Недостаточно аргументов");
+            throw new CalculatorException("Insufficient arguments");
 
         var arguments = new List<decimal>();
         for (int i = 1; i < parts.Length; i++)
@@ -91,7 +91,7 @@ public class InputParser
             }
             else
             {
-                throw new CalculatorException($"Неверный формат числа: {parts[i]}");
+                throw new CalculatorException($"Invalid number format: {parts[i]}");
             }
         }
 
