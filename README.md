@@ -43,7 +43,7 @@ mkdir build
 cd build
 cmake ..
 cmake --build .
-./Eventer
+./Debug/Eventer
 ```
 
 - файлы логирования находяться в папке Eventer/build/
