@@ -36,22 +36,18 @@ public class InputParser
         var operators = new Stack<string>();
         var tokens = input.Split(' ');
 
-        // Первый токен - это операция
         var operation = tokens[0];
         operators.Push(operation);
 
-        // Остальные токены - это числа, берем только необходимое количество
         var numbers = tokens.Skip(1)
                            .Where(t => double.TryParse(t, out _))
                            .Take(_operationProvider.GetOperation(operation) is IUnaryOperation ? 1 : 2);
 
-        // Сначала добавляем числа
         foreach (var number in numbers)
         {
             output.Enqueue(number);
         }
 
-        // Затем добавляем операцию
         while (operators.Count > 0)
         {
             output.Enqueue(operators.Pop());
@@ -72,13 +68,11 @@ public class InputParser
 
         var operation = parts[0].ToLower().Replace("op:", "").Trim();
         
-        // Special handling for help command
         if (operation == "h")
         {
             return (operation, Array.Empty<decimal>());
         }
 
-        // Processing other commands
         if (parts.Length < 2)
             throw new CalculatorException("Insufficient arguments");
 
