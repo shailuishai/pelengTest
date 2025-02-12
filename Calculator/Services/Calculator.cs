@@ -26,11 +26,9 @@ public class Calculator
 
             var operation = _operationProvider.GetOperation(token);
             
-            // Получаем минимальное необходимое количество аргументов
             int requiredArgs = operation is IUnaryOperation ? 1 : 2;
             var args = new double[requiredArgs];
-            
-            // Берем только первые необходимые аргументы из стека
+
             for (int i = requiredArgs - 1; i >= 0; i--)
             {
                 if (stack.Count == 0)
@@ -45,8 +43,7 @@ public class Calculator
             throw new CalculatorException("Ошибка вычисления: пустой стек");
 
         var result = stack.Pop();
-        
-        // Очищаем оставшиеся значения в стеке
+
         stack.Clear();
         
         return result;
