@@ -1,8 +1,10 @@
 #include "logger.h"
+#include "TimeUtils.h"
 #include <ctime>
+#include <optional>
 
-Logger::Logger(const char* fileName) {
-    file.open(fileName, std::ios::app);
+Logger::Logger(std::string_view fileName) {
+    file.open(std::string(fileName), std::ios::app);
 }
 
 Logger::~Logger() {
@@ -11,7 +13,7 @@ Logger::~Logger() {
     }
 }
 
-Logger* Logger::GetLogger(int level) {
+ std::optional<Logger*> Logger::GetLogger(int level) { 
     switch (level) {
     case 0:
         return new Level0Logger("log0.txt");
@@ -20,48 +22,35 @@ Logger* Logger::GetLogger(int level) {
     case 2:
         return new Level2Logger("log2.txt");
     default:
-        return nullptr;
+        return std::nullopt; // С++17 nullptr -> std::nullopt
     }
 }
 
-Level0Logger::Level0Logger(const char* fileName) : Logger(fileName) {}
+void Logger::WriteTimeAndId(std::ostream& out, const Event& event) {
+    std::string timeStr;
+    timeStr = TimeUtils::getCurrentTimeString();
+    out << "Time: " << timeStr << "Event ID: " << event.id;
+}
+
+Level0Logger::Level0Logger(std::string_view fileName) : Logger(fileName) {}
 
 void Level0Logger::Write(const Event& event) {
-    char timeStr[26];
-#ifdef _WIN32
-    ctime_s(timeStr, sizeof(timeStr), &event.timestamp);  // Windows version
-#else
-    ctime_r(&event.timestamp, timeStr);  // Linux version
-#endif
-    file << "Time: " << timeStr << "Event ID: " << event.id << std::endl;
+    WriteTimeAndId(file, event);
+    file << std::endl;
 }
 
-Level1Logger::Level1Logger(const char* fileName) : Logger(fileName) {}
+Level1Logger::Level1Logger(std::string_view fileName) : Logger(fileName) {}
 
 void Level1Logger::Write(const Event& event) {
-    char timeStr[26];
-#ifdef _WIN32
-    ctime_s(timeStr, sizeof(timeStr), &event.timestamp);  // Windows version
-#else
-    ctime_r(&event.timestamp, timeStr);  // Linux version
-#endif
-    file << "Time: " << timeStr
-        << "Event ID: " << event.id
-        << " Param1: " << event.param1 << std::endl;
+    WriteTimeAndId(file, event);
+    file << " Param1: " << event.param1 << std::endl;
 }
 
-Level2Logger::Level2Logger(const char* fileName) : Logger(fileName) {}
+Level2Logger::Level2Logger(std::string_view fileName) : Logger(fileName) {}
 
 void Level2Logger::Write(const Event& event) {
-    char timeStr[26];
-#ifdef _WIN32
-    ctime_s(timeStr, sizeof(timeStr), &event.timestamp);  // Windows version
-#else
-    ctime_r(&event.timestamp, timeStr);  // Linux version
-#endif
-    file << "Time: " << timeStr
-        << "Event ID: " << event.id
-        << " Param1: " << event.param1
-        << " Param2: " << event.param2
-        << " Param3: " << event.param3 << std::endl;
+    WriteTimeAndId(file, event);
+    file << " Param1: " << event.param1
+         << " Param2: " << event.param2
+         << " Param3: " << event.param3 << std::endl;
 }

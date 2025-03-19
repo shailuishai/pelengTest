@@ -69,11 +69,7 @@ void LogEvents() {
 void PrintDate(const char*) {
     time_t now = time(nullptr);
     char dateStr[26];
-#ifdef _WIN32
-    ctime_s(dateStr, sizeof(dateStr), &now);  // Windows version
-#else
-    ctime_r(&now, dateStr);  // Linux version
-#endif
+    ctime_s(dateStr, sizeof(dateStr), &now);
     std::cout << "Current date: " << dateStr;
 }
 
@@ -81,21 +77,16 @@ void PrintTime(const char*) {
     auto now = std::chrono::system_clock::now();
     time_t tt = std::chrono::system_clock::to_time_t(now);
     char timeStr[26];
-#ifdef _WIN32
-    ctime_s(timeStr, sizeof(timeStr), &tt);  // Windows version
-#else
-    ctime_r(&tt, timeStr);  // Linux version
-#endif
+    ctime_s(timeStr, sizeof(timeStr), &tt);
     std::cout << "Current time: " << timeStr;
 }
 
-void SetLevel(const char* param) {
-    if (!param) {
+void SetLevel(std::string_view param) {
+    if (param.empty()) {
         std::cerr << "Level parameter required" << std::endl;
         return;
     }
 
-    // Преобразуем строку в число, игнорируя пробелы
     std::string paramStr(param);
     paramStr.erase(std::remove_if(paramStr.begin(), paramStr.end(), ::isspace), paramStr.end());
 
@@ -108,10 +99,10 @@ void SetLevel(const char* param) {
 
         {
             std::lock_guard<std::mutex> logLock(loggerMutex);
-            Logger* newLogger = Logger::GetLogger(level);
+            auto newLogger = Logger::GetLogger(level);
             if (newLogger) {
                 delete currentLogger;
-                currentLogger = newLogger;
+                currentLogger = newLogger.value();
                 std::cout << "Logging level changed to " << level << std::endl;
             }
         }
@@ -131,15 +122,18 @@ void PrintStat(const char*) {
 int main() {
     std::map<std::string, void(*)(const char*)> commands;
 
-    // Инициализация команд
     commands["date"] = PrintDate;
     commands["time"] = PrintTime;
     commands["stat"] = PrintStat;
 
-    // Отдельная обработка для команды level
     std::string levelPrefix = "level ";
 
-    currentLogger = Logger::GetLogger(0);
+    auto loggerOpt = Logger::GetLogger(0);
+    if (!loggerOpt) {
+        std::cerr << "Failed to initialize logger" << std::endl;
+        return 1;
+    }
+    currentLogger = loggerOpt.value();
 
     std::thread eventGenerator(GenerateEvents);
     std::thread eventLogger(LogEvents);
@@ -169,8 +163,8 @@ int main() {
             std::cout << "Event generation resumed" << std::endl;
         }
         else if (input.compare(0, levelPrefix.length(), levelPrefix) == 0) {
-            std::string levelStr = input.substr(levelPrefix.length());
-            SetLevel(levelStr.c_str());
+            std::string_view levelStr = std::string_view(input).substr(levelPrefix.length()); //C+++17 
+            SetLevel(levelStr);
         }
         else {
             auto it = commands.find(input);

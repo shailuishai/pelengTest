@@ -1,0 +1,42 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="400"
+        x:Class="Calculator.UI.AdvancedOperationsWindow"
+        Title="Дополнительные операции"
+        Width="500" Height="400">
+
+    <Grid RowDefinitions="Auto,*,Auto" Margin="10">
+        <TextBlock Grid.Row="0" Text="Выберите операцию:" FontSize="16" Margin="0,0,0,10" />
+        
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto">
+            <ListBox x:Name="OperationsListBox" Grid.Column="0" SelectionMode="Single">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" Margin="5">
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                            <TextBlock Text="{Binding Description}" TextWrapping="Wrap" />
+                            <TextBlock Text="{Binding Parameters}" Foreground="Gray" />
+                            <TextBlock Text="{Binding Usage}" Foreground="Gray" FontStyle="Italic" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel Grid.Column="1" Margin="10,0,0,0" Spacing="10">
+                <TextBlock Text="Аргументы:" FontWeight="Bold" />
+                <TextBox x:Name="ArgumentsTextBox" 
+                         Watermark="Введите аргументы через пробел"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         Height="100" />
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,10,0,0">
+            <Button Content="Отмена" Click="OnCancelClick" />
+            <Button Content="Выполнить" Click="OnExecuteClick" />
+        </StackPanel>
+    </Grid>
+</Window> 

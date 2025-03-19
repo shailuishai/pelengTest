@@ -1,0 +1,50 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="500"
+        x:Class="Calculator.UI.MainWindow"
+        Title="Калькулятор"
+        Width="400" Height="500">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <TextBox x:Name="DisplayTextBox" 
+                 Grid.Row="0" 
+                 Margin="10" 
+                 FontSize="24" 
+                 IsReadOnly="True"
+                 TextAlignment="Right"
+                 Text="0" />
+
+        <Grid Grid.Row="1" Margin="10" RowDefinitions="*,*,*,*,*" ColumnDefinitions="*,*,*,*">
+            <Button Grid.Row="0" Grid.Column="0" Content="C" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnClearClick" />
+            <Button Grid.Row="0" Grid.Column="1" Content="(" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+            <Button Grid.Row="0" Grid.Column="2" Content=")" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+            <Button Grid.Row="0" Grid.Column="3" Content="/" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+
+            <Button Grid.Row="1" Grid.Column="0" Content="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+            <Button Grid.Row="1" Grid.Column="1" Content="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+            <Button Grid.Row="1" Grid.Column="2" Content="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+            <Button Grid.Row="1" Grid.Column="3" Content="*" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+
+            <Button Grid.Row="2" Grid.Column="0" Content="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+            <Button Grid.Row="2" Grid.Column="1" Content="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+            <Button Grid.Row="2" Grid.Column="2" Content="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+            <Button Grid.Row="2" Grid.Column="3" Content="-" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+
+            <Button Grid.Row="3" Grid.Column="0" Content="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+            <Button Grid.Row="3" Grid.Column="1" Content="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+            <Button Grid.Row="3" Grid.Column="2" Content="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+            <Button Grid.Row="3" Grid.Column="3" Content="+" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+
+            <Button Grid.Row="4" Grid.Column="0" Content="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+            <Button Grid.Row="4" Grid.Column="1" Content="." HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnButtonClick" />
+            <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Content="=" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Click="OnCalculateClick" />
+        </Grid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Дополнительные операции" Click="OnAdvancedOperationsClick" Margin="5" />
+            <Button Content="Помощь" Click="OnHelpClick" Margin="5" />
+        </StackPanel>
+    </Grid>
+</Window> 

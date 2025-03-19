@@ -1,0 +1,17 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="400"
+        x:Class="Calculator.UI.HelpWindow"
+        Title="Справка"
+        Width="500" Height="400">
+
+    <Grid RowDefinitions="Auto,*">
+        <TextBlock Grid.Row="0" Margin="10" Text="Доступные операции:" FontSize="16" />
+        
+        <ScrollViewer Grid.Row="1" Margin="10">
+            <TextBlock x:Name="HelpTextBlock" TextWrapping="Wrap" />
+        </ScrollViewer>
+    </Grid>
+</Window> 
